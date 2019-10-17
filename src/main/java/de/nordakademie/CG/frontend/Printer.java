@@ -12,6 +12,43 @@ public class Printer {
     Scanner scanner = new Scanner(System.in);
     ArrayList<String> sudolus = new ArrayList<>();
 
+    public void menuLoop() {
+        int selection;
+
+        do {
+            this.printDialog();
+            selection = this.scanner.nextInt();
+
+            if (selection == 0) {
+                break;
+            } else if (selection == 1) {
+                readSudoku();
+            } else if (selection > 1 && selection <= this.sudolus.size() + 1) {
+                printAll(sudolus.get(selection - 2));
+            } else {
+                System.out.println("ungültig");
+            }
+
+
+
+
+
+
+        } while (true);
+
+    }
+
+    private void printDialog() {
+        System.out.println("(0) Stop");
+        System.out.println("(1) Load file");
+
+        int i = 2;
+        for (String sudoku : this.sudolus) {
+            System.out.println("(" + i++ + ") Print sudoku nr. " + sudoku.substring(0,4));
+        }
+    }
+
+
     public void printLine(){
         System.out.print(ConsoleColors.RED + "+");
         for(int i = 0; i < 3 ; i++){
@@ -42,9 +79,7 @@ public class Printer {
         System.out.println(ConsoleColors.RESET);
     }
 
-    public void printAll(){
-        System.out.println(sudolus);
-        String sudoku = sudolus.get(0);
+    public void printAll(String sudoku){
         System.out.println("Sudoku Nr.: " + sudoku.substring(0,4));
         printRedLine();
         for( int i = 0; i < 9; i++){
@@ -62,6 +97,8 @@ public class Printer {
 
 
         System.out.println("Dateiname (absoluter Pfad):");
+        System.out.println("Press enter for default file.");
+        scanner.nextLine();
         String fileName = scanner.nextLine();
         if(fileName.equals("")){
             fileName = "/Users/andreclausen/IdeaProjects/sudokuDisplay/src/main/resources/sudokus.txt";
