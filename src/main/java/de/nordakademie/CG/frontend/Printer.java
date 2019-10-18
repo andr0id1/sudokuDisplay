@@ -10,11 +10,10 @@ import java.util.Scanner;
 public class Printer {
 
     Scanner scanner = new Scanner(System.in);
-    ArrayList<String> sudolus = new ArrayList<>();
+    ArrayList<String> sudokus = new ArrayList<>();
 
     public void menuLoop() {
         int selection;
-
         do {
             this.printDialog();
             selection = this.scanner.nextInt();
@@ -23,17 +22,11 @@ public class Printer {
                 break;
             } else if (selection == 1) {
                 readSudoku();
-            } else if (selection > 1 && selection <= this.sudolus.size() + 1) {
-                printAll(sudolus.get(selection - 2));
+            } else if (selection > 1 && selection <= this.sudokus.size() + 1) {
+                printAll(sudokus.get(selection - 2));
             } else {
                 System.out.println("ungültig");
             }
-
-
-
-
-
-
         } while (true);
 
     }
@@ -43,7 +36,7 @@ public class Printer {
         System.out.println("(1) Load file");
 
         int i = 2;
-        for (String sudoku : this.sudolus) {
+        for (String sudoku : this.sudokus) {
             System.out.println("(" + i++ + ") Print sudoku nr. " + sudoku.substring(0,4));
         }
     }
@@ -111,7 +104,7 @@ public class Printer {
                 lineNumber++;
                 if(line.length()%85 == 0){
                     while (line.length() > 0){
-                        sudolus.add(line.substring(0,85));
+                        sudokus.add(line.substring(0,85));
                         line = line.substring(85, line.length());
                     }
                 }else{
